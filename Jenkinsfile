@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Sonar Analysis') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                withSonarQubeEnv('SonarQube') {
+                 sh 'mvn clean package sonar:sonar'
+              }
             }
         }
     }
